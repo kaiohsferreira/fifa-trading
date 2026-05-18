@@ -1,0 +1,41 @@
+﻿{
+<<<<<<< HEAD
+    "generatedAt":  "2026-04-10T09:58:54.6560390-03:00",
+=======
+    "generatedAt":  "2026-04-10T09:23:14.0084406-03:00",
+>>>>>>> 504915bd19c67aa5ae70efe330c982c2dca3290f
+    "totalRuns":  275,
+    "failedRuns":  36,
+    "successRuns":  239,
+    "avgPassRate":  0.9984,
+<<<<<<< HEAD
+    "avgDurationMs":  2026,
+    "lastRun":  {
+                    "timestamp":  "2026-04-10T09:58:54.3192588-03:00",
+=======
+    "avgDurationMs":  2003,
+    "lastRun":  {
+                    "timestamp":  "2026-04-10T09:23:13.8872680-03:00",
+>>>>>>> 504915bd19c67aa5ae70efe330c982c2dca3290f
+                    "targetsPath":  ".cursor/testing-module/config/testing-targets.json",
+                    "targetsSource":  "auto-default",
+                    "casesPath":  ".cursor/testing-module/reports/generated-cases.json",
+                    "reportPath":  ".cursor/testing-module/reports/final-report.json",
+                    "success":  false,
+                    "totalCases":  100,
+                    "passed":  99,
+                    "failed":  1,
+                    "skipped":  0,
+                    "passRate":  0.99,
+<<<<<<< HEAD
+                    "durationMs":  3947,
+=======
+                    "durationMs":  1655,
+>>>>>>> 504915bd19c67aa5ae70efe330c982c2dca3290f
+                    "commandCases":  98,
+                    "realCommandCases":  3,
+                    "mockCommandCases":  95,
+                    "qualityGatesPassed":  false,
+                    "isCi":  false
+                }
+}

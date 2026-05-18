@@ -1,0 +1,98 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ROVIS Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="workspace">
+        <aside class="sessions-panel">
+          <button id="newSessionBtn" type="button" class="new-chat-btn">
+            <span class="material-symbols-outlined">add_comment</span>
+            Nova conversa
+          </button>
+
+          <div class="sessions-head">
+            <strong>Recent Memories</strong>
+          </div>
+          <div id="sessionsList" class="sessions-list"></div>
+
+          <div class="sidebar-footer">
+            <button type="button" class="ghost-nav-btn">
+              <span class="material-symbols-outlined">help</span>
+              Support
+            </button>
+            <button type="button" class="ghost-nav-btn">
+              <span class="material-symbols-outlined">settings</span>
+              Settings
+            </button>
+          </div>
+        </aside>
+
+        <div class="conversation-column">
+          <header class="topbar">
+            <div class="brand-lockup">
+              <span id="heroKicker" class="eyebrow">Modo ROVIS</span>
+              <h1>ROVIS Chat</h1>
+              <p id="heroText">O Codex CLI roda por tras dos panos. A interface fica focada em modo, chat, imagem e historico.</p>
+            </div>
+            <div class="topbar-side">
+              <span id="activeMode" class="mode-badge">Modo nao selecionado</span>
+              <button id="changeModeBtn" type="button" class="ghost-btn">Trocar modo</button>
+              <span id="status" class="status">Conectando...</span>
+            </div>
+          </header>
+
+          <section class="mode-summary">
+            <h2 id="heroTitle">Conversa simples, direta e com comportamento guiado por modo.</h2>
+          </section>
+
+          <section id="chat" class="chat" aria-live="polite"></section>
+
+          <form id="composer" class="composer">
+            <textarea id="message" placeholder="Manda a missão aqui..." rows="3"></textarea>
+
+            <div class="tools">
+              <label class="upload-btn" for="images">Adicionar imagens</label>
+              <input id="images" type="file" accept="image/*" multiple />
+              <button type="submit" id="sendBtn">Enviar</button>
+            </div>
+
+            <div id="preview" class="preview"></div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <template id="messageTpl">
+      <article class="bubble-wrap">
+        <span class="who"></span>
+        <div class="bubble"></div>
+      </article>
+    </template>
+
+    <section id="modeGate" class="mode-gate">
+      <div class="mode-card">
+        <span class="eyebrow">Selecionar modo</span>
+        <h2>Qual modo ROVIS voce quer usar?</h2>
+        <p>Escolha um modo para iniciar. O comportamento do chat muda conforme o modo ativo.</p>
+        <div id="modeOptions" class="mode-options"></div>
+      </div>
+    </section>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

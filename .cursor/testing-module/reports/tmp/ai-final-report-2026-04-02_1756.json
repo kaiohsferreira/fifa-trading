@@ -1,0 +1,69 @@
+{
+  "success": false,
+  "generatedAt": "2026-04-02T17:56:17.530Z",
+  "runMode": "browser",
+  "targetBaseUrl": "http://localhost:3000",
+  "summary": {
+    "totalCases": 1,
+    "passed": 0,
+    "failed": 1,
+    "skipped": 0,
+    "errored": 0,
+    "durationMs": 18327,
+    "passRate": 0
+  },
+  "qualityScore": {
+    "total": 39,
+    "band": "critical",
+    "breakdown": {
+      "passRate": 0,
+      "passRateScore": 0,
+      "aiConfidenceAvg": 0.8,
+      "aiConfidenceScore": 16,
+      "realCasesRatio": 1,
+      "realCasesScore": 20,
+      "coverageBreadth": 0.25,
+      "coverageBreadthScore": 3
+    }
+  },
+  "results": [
+    {
+      "id": "codex-browser-login-fallback",
+      "type": "browser_flow",
+      "name": "Browser smoke: abrir app e validar login",
+      "status": "failed",
+      "expected": "All flow steps complete without errors",
+      "actual": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/\", waiting until \"domcontentloaded\"\u001b[22m\n",
+      "durationMs": 6031,
+      "aiConfidence": 0.8,
+      "evidence": {
+        "logs": [
+          "Starting browser flow: Browser smoke: abrir app e validar login",
+          "[FAILED] page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/\", waiting until \"domcontentloaded\"\u001b[22m\n",
+          "Screenshot saved: D:\\secondmind\\IFinc\\.cursor\\testing-module\\ai-engine\\.cursor\\testing-module\\reports\\playwright-artifacts\\screenshots\\codex-browser-login-fallback-failure-1775152565114.png"
+        ],
+        "errorMessage": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/\", waiting until \"domcontentloaded\"\u001b[22m\n",
+        "screenshotPath": "D:\\secondmind\\IFinc\\.cursor\\testing-module\\ai-engine\\.cursor\\testing-module\\reports\\playwright-artifacts\\screenshots\\codex-browser-login-fallback-failure-1775152565114.png",
+        "tracePath": "D:\\secondmind\\IFinc\\.cursor\\testing-module\\ai-engine\\.cursor\\testing-module\\reports\\playwright-artifacts\\traces\\codex-browser-login-fallback-failure-1775152565217.zip"
+      },
+      "aiAnalysis": {
+        "rootCause": "The browser test could not connect to the application because nothing was listening on http://localhost:3000. The failure happened before any UI interaction, which strongly indicates the local app server was not running, crashed during startup, or was configured to use a different port than the test expects.",
+        "severity": "high",
+        "suggestion": "Ensure the app is started and healthy before browser tests run, and verify the test base URL matches the actual dev server port. Add a startup/health check in the test harness so the suite fails fast with a clearer message if the server is unavailable.",
+        "category": "environment"
+      }
+    }
+  ],
+  "aiInsights": [
+    "The test run failed with 0 of 1 cases passing, and the quality score of 39/100 indicates the build is not in an acceptable state for release. With every executed case failing, the result points to a blocking issue that needs investigation and remediation before this can be considered stable.",
+    "This test run did not reach the application at all, so it provides no signal about product behavior and points to a harness or environment issue rather than a functional regression.",
+    "The failure is deterministic and immediate, which suggests a missing prerequisite such as an unstarted dev server, incorrect port, or misconfigured base URL.",
+    "Adding explicit preflight checks for server availability would improve debuggability and prevent browser tests from failing deep inside Playwright navigation.",
+    "The current smoke test setup appears fragile because a single environment dependency blocks the entire flow before login validation can begin."
+  ],
+  "artifacts": {
+    "reportJsonPath": "D:\\secondmind\\IFinc\\.cursor\\testing-module\\reports\\ai-final-report.json",
+    "reportHtmlPath": "D:\\secondmind\\IFinc\\.cursor\\testing-module\\reports\\ai-final-report.html",
+    "activityLogPath": "D:\\secondmind\\IFinc\\.cursor\\testing-module\\reports\\ai-activity-log.md"
+  }
+}

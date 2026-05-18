@@ -1,0 +1,937 @@
+{
+  "success": true,
+  "generatedAt": "2026-04-06T13:27:43.743Z",
+  "runMode": "all",
+  "targetBaseUrl": "http://localhost:33422",
+  "summary": {
+    "totalCases": 45,
+    "passed": 45,
+    "failed": 0,
+    "skipped": 0,
+    "errored": 0,
+    "durationMs": 199,
+    "passRate": 1
+  },
+  "qualityScore": {
+    "total": 65,
+    "band": "warning",
+    "breakdown": {
+      "passRate": 1,
+      "passRateScore": 50,
+      "aiConfidenceAvg": 0.6,
+      "aiConfidenceScore": 12,
+      "realCasesRatio": 0,
+      "realCasesScore": 0,
+      "coverageBreadth": 0.25,
+      "coverageBreadthScore": 3
+    }
+  },
+  "results": [
+    {
+      "id": "user-organizations-grouped-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: user-organizations-grouped contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 401",
+      "durationMs": 39,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/User/GetAllGroupedByRole",
+          "Contract: user-organizations-grouped",
+          "Response: 401 in 36ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "Erro, usuário não encontrado"
+        }
+      }
+    },
+    {
+      "id": "simulation-spreadsheet-epplus-refactor-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: simulation-spreadsheet-epplus-refactor contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 400",
+      "durationMs": 6,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: POST http://localhost:33422/Simulation/SaveSimulation",
+          "Contract: simulation-spreadsheet-epplus-refactor",
+          "Response: 400 in 6ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "A non-empty request body is required."
+        }
+      }
+    },
+    {
+      "id": "simulation-spreadsheet-circular-reference-fix-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: simulation-spreadsheet-circular-reference-fix contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 400",
+      "durationMs": 6,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: POST http://localhost:33422/Simulation/SaveSimulation",
+          "Contract: simulation-spreadsheet-circular-reference-fix",
+          "Response: 400 in 5ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "A non-empty request body is required."
+        }
+      }
+    },
+    {
+      "id": "simulation-returnfrompdf-template-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: simulation-returnfrompdf-template contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 401",
+      "durationMs": 11,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/Simulation/ReturnFromPdf",
+          "Contract: simulation-returnfrompdf-template",
+          "Response: 401 in 11ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "Erro, usuário não encontrado"
+        }
+      }
+    },
+    {
+      "id": "simulation-pdf-price-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: simulation-pdf-price contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 401",
+      "durationMs": 9,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/Simulation/ReturnFromPdf",
+          "Contract: simulation-pdf-price",
+          "Response: 401 in 8ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "Erro, usuário não encontrado"
+        }
+      }
+    },
+    {
+      "id": "simulation-pdf-layout-amortization-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: simulation-pdf-layout-amortization contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: simulation-pdf-layout-amortization",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "simulation-management-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: simulation-management contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 2,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: simulation-management",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "simulation-management-v2-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: simulation-management-v2 contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: simulation-management-v2",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "simulation-approval-customer-data-validation-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: simulation-approval-customer-data-validation contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: simulation-approval-customer-data-validation",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "signature-document-operations-flag-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: signature-document-operations-flag contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 2,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET|POST http://localhost:33422/SignatureDocument/*, /OperationsDocument/*, /Bacen/RequestSignature, /Bacen/RequestSignatureByProposal/{proposalId}",
+          "Contract: signature-document-operations-flag",
+          "Response: 404 in 2ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "serasa-integration-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: serasa-integration contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 4,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: serasa-integration",
+          "Response: 404 in 3ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "serasa-consultation-history-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: serasa-consultation-history contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 2,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: serasa-consultation-history",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "request-document-status-map-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: request-document-status-map contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 3,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: POST|GET http://localhost:33422/OperationsDocument/UpdateRequestStatusDocument, /OperationsDocument/GetAllRequestDocuments, /OperationsDocument/GetAllRequestDocumentsByUserId, /OperationsDocument/PrepareRequestDocument, /SignatureDocument/UpdateRequestStatusDocument, /SignatureDocument/GetAllRequestDocuments, /SignatureDocument/GetAllRequestDocumentsByUserId, /SignatureDocument/PrepareRequestDocument, /Bacen/RequestSignature, /Bacen/RequestSignatureByProposal/{proposalId}",
+          "Contract: request-document-status-map",
+          "Response: 404 in 2ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "proposal-select-options-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: proposal-select-options contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 2,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: proposal-select-options",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "proposal-proponents-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: proposal-proponents contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: proposal-proponents",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "proposal-properties-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: proposal-properties contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: proposal-properties",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "proposal-operation-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: proposal-operation contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: proposal-operation",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "proposal-activity-history-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: proposal-activity-history contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 401",
+      "durationMs": 8,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/ProposalActivityHistory/GetAllByProposalId",
+          "Contract: proposal-activity-history",
+          "Response: 401 in 7ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "Erro, usuário não encontrado"
+        }
+      }
+    },
+    {
+      "id": "process-risk-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: process-risk contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: process-risk",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "process-risk-report-download-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: process-risk-report-download contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 3,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/ProcessRisk/Report + /ProcessRisk/Report/Download",
+          "Contract: process-risk-report-download",
+          "Response: 404 in 3ms"
+        ],
+        "responseBody": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"> \n<html xmlns=\"http://www.w3.org/1999/xhtml\"> \n<head> \n<title>IIS 10.0 Detailed Error - 404.11 - Not Found</title> \n<style type=\"text/css\"> \n<!-- \nbody{margin:0;font-size:.7em;font-family:Verdana,Arial,Helvetica,sans-serif;} \ncode{margin:0;color:#006600;font-size:1.1em;font-weight:bold;} \n.config_source code{font-size:.8em;color:#000000;} \npre{margin:0;font-size:1.4em;word-wrap:break-word;} \nul,ol{margin:10px 0 10px 5px;} \nul.first,ol.first{margin-top:5px;} \nfieldset{padding:0 15px 10px 15px;word-break:break-all;} \n.summary-container fieldset{padding-bottom:5px;margin-top:4px;} \nlegend.no-expand-all{padding:2px 15px 4px 10px;margin:0 0 0 -12px;} \nlegend{color:#333333;;margin:4px 0 8px -12px;_margin-top:0px; \nfont-weight:bold;font-size:1em;} \na:link,a:visited{color:#007EFF;font-weight:bold;} \na:hover{text-decoration:none;} \nh1{font-size:2.4em;margin:0;color:#FFF;} \nh2{font-size:1.7em;margin:0;color:#CC0000;} \nh3{font-size:1.4em;margin:10px 0 0 0;color:#CC0000;} \nh4{font-size:1.2em;margin:10px 0 5px 0; \n}#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:\"trebuchet MS\",Verdana,sans-serif; \n color:#FFF;background-color:#5C87B2; \n}#content{margin:0 0 0 2%;position:relative;} \n.summary-container,.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;} \n.content-container p{margin:0 0 10px 0; \n}#details-left{width:35%;float:left;margin-right:2%; \n}#details-right{width:63%;float:left;overflow:hidden; \n}#server_version{width:96%;_height:1px;min-height:1px;margin:0 0 5px 0;padding:11px 2% 8px 2%;color:#FFFFFF; \n background-color:#5A7FA5;border-bottom:1px solid #C1CFDD;border-top:1px solid #4A6C8E;font-weight:normal; \n font-size:1em;color:#FFF;text-align:right; \n}#server_version p{margin:5px 0;} \ntable{margin:4px 0 4px 0;width:100%;border:none;} \ntd,th{vertical-align:top;padding:3px 0;text-align:left;font-weight:normal;border:none;} \nth{width:30%;text-align:right;padding-right:2%;font-weight:bold;} \nthead th{background-color:#ebebeb;width:25%; \n}#details-right th{width:20%;} \ntable tr.alt td,table tr.alt th{} \n.highlight-code{color:#CC0000;font-weight:bold;font-style:italic;} \n.clear{clear:both;} \n.preferred{padding:0 5px 2px 5px;font-weight:normal;background:#006633;color:#FFF;font-size:.8em;} \n--> \n</style> \n \n</head> \n<body> \n<div id=\"content\"> \n<div class=\"content-container\"> \n  <h3>HTTP Error 404.11 - Not Found</h3> \n  <h4>O módulo de filtragem de solicitação está configurado para negar uma solicitação que contenha uma sequência de saída dupla.</h4> \n</div> \n<div class=\"content-container\"> \n <fieldset><h4>Causas mais prováveis:</h4> \n  <ul> \t<li>A solicitação continha uma sequência de saída dupla, e a filtragem de solicitação está configurada no servidor Web para negar sequências de saída dupla.</li> </ul> \n </fieldset> \n</div> \n<div class=\"content-container\"> \n <fieldset><h4>Ações que você pode tentar:</h4> \n  <ul> \t<li>Verifique a configuração de configuration/system.webServer/security/requestFiltering@allowDoubleEscaping no arquivo applicationhost.config ou web.confg.</li> </ul> \n </fieldset> \n</div> \n \n<div class=\"content-container\"> \n <fieldset><h4>Detailed Error Information:</h4> \n  <div id=\"details-left\"> \n   <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"> \n    <tr class=\"alt\"><th>Module</th><td>&nbsp;&nbsp;&nbsp;RequestFilteringModule</td></tr> \n    <tr><th>Notification</th><td>&nbsp;&nbsp;&nbsp;BeginRequest</td></tr> \n    <tr class=\"alt\"><th>Handler</th><td>&nbsp;&nbsp;&nbsp;aspNetCore</td></tr> \n    <tr><th>Error Code</th><td>&nbsp;&nbsp;&nbsp;0x00000000</td></tr> \n     \n   </table> \n  </div> \n  <div id=\"details-right\"> \n   <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"> \n    <tr class=\"alt\"><th>Requested URL</th><td>&nbsp;&nbsp;&nbsp;http://localhost:33422/ProcessRisk/Report + /ProcessRisk/Report/Download</td></tr> \n    <tr><th>Physical Path</th><td>&nbsp;&nbsp;&nbsp;D:\\secondmind\\IFinc\\IFinc-BackEnd\\IFinc.API\\ProcessRisk\\Report + \\ProcessRisk\\Report\\Download</td></tr> \n    <tr class=\"alt\"><th>Logon Method</th><td>&nbsp;&nbsp;&nbsp;Ainda não determinado</td></tr> \n    <tr><th>Logon User</th><td>&nbsp;&nbsp;&nbsp;Ainda não determinado</td></tr> \n     \n   </table> \n   <div class=\"clear\"></div> \n  </div> \n </fieldset> \n</div> \n \n<div class=\"content-container\"> \n <fieldset><h4>More Information:</h4> \n  Este é um recurso de segurança. Não o altere, a menos que o escopo da alteração seja totalmente compreendido. Você deve fazer um rastreamento de rede antes de alterar esse valor, para confirmar se a solicitação não é mal-intencionada. Para que as sequências de saída dupla sejam permitidas pelo servidor, modifique a configuração de configuration/system.webServer/security/requestFiltering@allowDoubleEscaping. A causa disso pode ser uma URL malformada enviada ao servidor por um usuário mal-intencionado. \n  <p><a href=\"https://go.microsoft.com/fwlink/?LinkID=62293&amp;IIS70Error=404,11,0x00000000,26200\">View more information &raquo;</a></p> \n   \n </fieldset> \n</div> \n</div> \n</body> \n</html> \n"
+      }
+    },
+    {
+      "id": "process-risk-conventions-refactor-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: process-risk-conventions-refactor contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: UNCHANGED http://localhost:33422/ProcessRisk/*",
+          "Contract: process-risk-conventions-refactor",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "organization-save-preserve-contacts-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: organization-save-preserve-contacts contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 400",
+      "durationMs": 3,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: POST http://localhost:33422/Organization/Save",
+          "Contract: organization-save-preserve-contacts",
+          "Response: 400 in 3ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "A non-empty request body is required."
+        }
+      }
+    },
+    {
+      "id": "organization-prepare-performance-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: organization-prepare-performance contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 401",
+      "durationMs": 7,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/Organization/Prepare",
+          "Contract: organization-prepare-performance",
+          "Response: 401 in 7ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "Erro, usuário não encontrado"
+        }
+      }
+    },
+    {
+      "id": "organization-prepare-approved-documents-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: organization-prepare-approved-documents contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: organization-prepare-approved-documents",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "organization-contacts-primary-rules-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: organization-contacts-primary-rules contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: organization-contacts-primary-rules",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "operations-document-status-and-generic-types-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: operations-document-status-and-generic-types contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET|POST http://localhost:33422/OperationsDocument/GetAllByUserId, /OperationsDocument/GetAllOperationDocumentGenericTypes, /OperationsDocument/CreateOperationDocumentGenericType",
+          "Contract: operations-document-status-and-generic-types",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "operation-committee-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: operation-committee contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 400",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: POST http://localhost:33422/OperationCommittee/Save",
+          "Contract: operation-committee",
+          "Response: 400 in 1ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "A non-empty request body is required."
+        }
+      }
+    },
+    {
+      "id": "operation-committee-get-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: operation-committee-get contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 401",
+      "durationMs": 7,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/OperationCommittee/GetByOperation",
+          "Contract: operation-committee-get",
+          "Response: 401 in 7ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "Erro, usuário não encontrado"
+        }
+      }
+    },
+    {
+      "id": "marketing-campaign-creative-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: marketing-campaign-creative contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 401",
+      "durationMs": 8,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/CampaignLead/GetMarketingOverview",
+          "Contract: marketing-campaign-creative",
+          "Response: 401 in 8ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "Erro, usuário não encontrado"
+        }
+      }
+    },
+    {
+      "id": "lead-log-message-standardization-no-parentheses-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: lead-log-message-standardization-no-parentheses contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET|POST http://localhost:33422/Lead/*",
+          "Contract: lead-log-message-standardization-no-parentheses",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "lead-kanban-paged-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: lead-kanban-paged contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 401",
+      "durationMs": 8,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/Lead/GetKanbanViewPaged",
+          "Contract: lead-kanban-paged",
+          "Response: 401 in 8ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "Erro, usuário não encontrado"
+        }
+      }
+    },
+    {
+      "id": "lead-import-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: lead-import contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 401",
+      "durationMs": 8,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: POST http://localhost:33422/Lead/Import",
+          "Contract: lead-import",
+          "Response: 401 in 8ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "Erro, usuário não encontrado"
+        }
+      }
+    },
+    {
+      "id": "lead-filters-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: lead-filters contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 400",
+      "durationMs": 3,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: POST http://localhost:33422/Lead/GetAllPaged",
+          "Contract: lead-filters",
+          "Response: 400 in 3ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "A non-empty request body is required."
+        }
+      }
+    },
+    {
+      "id": "lead-distribution-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: lead-distribution contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: lead-distribution",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "lead-dashboard-metrics-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: lead-dashboard-metrics contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 400",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: POST http://localhost:33422/Lead/DashboardMetrics",
+          "Contract: lead-dashboard-metrics",
+          "Response: 400 in 1ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "A non-empty request body is required."
+        }
+      }
+    },
+    {
+      "id": "image-upload-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: image-upload contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 400",
+      "durationMs": 2,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: POST http://localhost:33422/Image/Upload",
+          "Contract: image-upload",
+          "Response: 400 in 2ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "A non-empty request body is required."
+        }
+      }
+    },
+    {
+      "id": "fixed-files-signature-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: fixed-files-signature contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: fixed-files-signature",
+          "Response: 404 in 0ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "credit-manual-entry-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: credit-manual-entry contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 0,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: credit-manual-entry",
+          "Response: 404 in 0ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "client-management-es03-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: client-management-es03 contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: client-management-es03",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "checklist-documents-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: checklist-documents contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: checklist-documents",
+          "Response: 404 in 0ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "base64-file-header-mime-targeted-endpoints-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: base64-file-header-mime-targeted-endpoints contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 401",
+      "durationMs": 8,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/Organization/GetApprovedDocumentFile",
+          "Contract: base64-file-header-mime-targeted-endpoints",
+          "Response: 401 in 8ms"
+        ],
+        "responseBody": {
+          "success": false,
+          "number": 0,
+          "object": null,
+          "message": "Erro, usuário não encontrado"
+        }
+      }
+    },
+    {
+      "id": "bank-questionnaire-config-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: bank-questionnaire-config contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: bank-questionnaire-config",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "bank-questionnaire-answers-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: bank-questionnaire-answers contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: bank-questionnaire-answers",
+          "Response: 404 in 1ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "bank-question-relationship-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: bank-question-relationship contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: GET http://localhost:33422/api/health",
+          "Contract: bank-question-relationship",
+          "Response: 404 in 0ms"
+        ],
+        "responseBody": ""
+      }
+    },
+    {
+      "id": "bacen-fixed-filename-smoke-fallback",
+      "type": "contract_smoke",
+      "name": "Smoke: bacen-fixed-filename contract endpoint reachable",
+      "status": "passed",
+      "expected": "Endpoint reachable (status < 500)",
+      "actual": "HTTP 404",
+      "durationMs": 1,
+      "aiConfidence": 0.6,
+      "evidence": {
+        "logs": [
+          "Smoke test: POST|GET http://localhost:33422/Bacen/RequestSignature, /Bacen/RequestSignatureByProposal/{proposalId}, /Bacen/PrepareByProposal/{proposalId}, /Bacen/DownloadByProposal/{proposalId}",
+          "Contract: bacen-fixed-filename",
+          "Response: 404 in 0ms"
+        ],
+        "responseBody": ""
+      }
+    }
+  ],
+  "aiInsights": [
+    "The test run was functionally clean: all 45 cases passed with no failures or skips, indicating the current build satisfies the covered test scenarios. However, the Quality Score of 65/100 suggests the overall confidence level is only moderate, likely reflecting gaps in coverage, edge-case validation, or non-functional checks rather than execution failures. This is acceptable for a routine regression checkpoint, but I would not treat it as strong release confidence without addressing the factors dragging the score down.",
+    "All 45 executed tests passed - no failures detected.",
+    "AI analysis: System appears healthy based on current test coverage.",
+    "Recommendation: Increase test coverage for edge cases and error scenarios."
+  ],
+  "artifacts": {
+    "reportJsonPath": "D:\\secondmind\\IFinc\\.cursor\\testing-module\\reports\\ai-final-report.json",
+    "reportHtmlPath": "D:\\secondmind\\IFinc\\.cursor\\testing-module\\reports\\ai-final-report.html",
+    "activityLogPath": "D:\\secondmind\\IFinc\\.cursor\\testing-module\\reports\\ai-activity-log.md"
+  }
+}

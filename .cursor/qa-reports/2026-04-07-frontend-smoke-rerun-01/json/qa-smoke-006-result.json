@@ -1,0 +1,163 @@
+{
+  "metadata": {
+    "id": "QA-SMOKE-006",
+    "scope": "frontend-smoke-rerun-01",
+    "startedAt": "2026-04-07T14:49:30.274Z",
+    "frontendUrl": "http://localhost:5173",
+    "backendUrl": "https://saas-homolog-api.alav.cloud",
+    "browser": "chromium",
+    "credentialsProfile": "admsaas@uorak.com",
+    "passwordRecorded": false,
+    "loadStrategy": "domcontentloaded"
+  },
+  "check": {
+    "id": "QA-SMOKE-006",
+    "name": "Login aceito cria sessao",
+    "status": "pass",
+    "route": "pos-login",
+    "expected": "Autenticacao aceita e token/sessao presente.",
+    "obtained": "status=202; href=http://localhost:5173/adm/dashboard; localToken=0; sessionToken=0; cookieToken=1",
+    "evidence": "screenshots/qa-smoke-006-after-submit.png",
+    "beforeEvidence": "screenshots/qa-smoke-006-before-submit.png",
+    "loginResponseStatus": 202,
+    "redirectedAwayFromRoot": true,
+    "tokenState": {
+      "href": "http://localhost:5173/adm/dashboard",
+      "title": "ALAV/Tech",
+      "localStorageKeys": [
+        "@alavtech/theme",
+        "@KeyMenu",
+        "@alavtech/action_menu"
+      ],
+      "localStorageTokenKeys": [],
+      "sessionStorageKeys": [],
+      "sessionStorageTokenKeys": [],
+      "cookie": "@alavtech/token=[MASKED]; @alavtech/refresh=[MASKED]",
+      "cookieTokenFragments": [
+        "@alavtech/token=[MASKED]"
+      ],
+      "bodyText": "Dashboard\nSP09 - 14.932.131/0001-11\nA\nDashboard"
+    }
+  },
+  "technicalEvents": [
+    {
+      "type": "console",
+      "level": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "console",
+      "level": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "console",
+      "level": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "console",
+      "level": "log",
+      "text": "entrou no user info"
+    },
+    {
+      "type": "console",
+      "level": "log",
+      "text": "entrou no user info"
+    },
+    {
+      "type": "response",
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "status": 500,
+      "method": "GET"
+    },
+    {
+      "type": "console",
+      "level": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 ()"
+    },
+    {
+      "type": "response",
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "status": 500,
+      "method": "GET"
+    },
+    {
+      "type": "console",
+      "level": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 ()"
+    },
+    {
+      "type": "response",
+      "url": "https://saas-homolog-api.alav.cloud/Account/Login",
+      "status": 202,
+      "method": "POST"
+    },
+    {
+      "type": "console",
+      "level": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "console",
+      "level": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "console",
+      "level": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "console",
+      "level": "log",
+      "text": "entrou no user info"
+    },
+    {
+      "type": "console",
+      "level": "log",
+      "text": "entrou no user info"
+    },
+    {
+      "type": "response",
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=HEADER",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=HEADER",
+      "status": 200,
+      "method": "GET"
+    }
+  ],
+  "screenshots": [
+    {
+      "label": "Antes do submit",
+      "path": "screenshots/qa-smoke-006-before-submit.png"
+    },
+    {
+      "label": "Depois do submit",
+      "path": "screenshots/qa-smoke-006-after-submit.png"
+    }
+  ],
+  "summary": {
+    "finishedAt": "2026-04-07T14:49:43.908Z",
+    "pass": 1,
+    "fail": 0,
+    "qualityScore": 100,
+    "band": "Excellent"
+  }
+}

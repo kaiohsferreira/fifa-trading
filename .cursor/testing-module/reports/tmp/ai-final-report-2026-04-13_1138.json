@@ -1,0 +1,119 @@
+{
+  "success": false,
+  "generatedAt": "2026-04-13T11:38:33.765Z",
+  "runMode": "api",
+  "targetBaseUrl": "https://apipris.secondmind.com.br",
+  "summary": {
+    "totalCases": 3,
+    "passed": 0,
+    "failed": 3,
+    "skipped": 0,
+    "errored": 0,
+    "durationMs": 21863,
+    "passRate": 0
+  },
+  "qualityScore": {
+    "total": 37,
+    "band": "critical",
+    "breakdown": {
+      "passRate": 0,
+      "passRateScore": 0,
+      "aiConfidenceAvg": 0.7,
+      "aiConfidenceScore": 14,
+      "realCasesRatio": 1,
+      "realCasesScore": 20,
+      "coverageBreadth": 0.25,
+      "coverageBreadthScore": 3
+    }
+  },
+  "results": [
+    {
+      "id": "backend-target-real-check-runner-script-exists-api-check",
+      "type": "api",
+      "name": "Backend target: real-check:runner-script-exists",
+      "status": "failed",
+      "expected": "HTTP 200",
+      "actual": "HTTP 404 — \"\"",
+      "durationMs": 8658,
+      "aiConfidence": 0.7,
+      "evidence": {
+        "logs": [
+          "GET https://apipris.secondmind.com.br/health",
+          "Response: 404 in 8652ms",
+          "Response body: \"\"",
+          "Status mismatch: expected 200, got 404"
+        ],
+        "responseBody": ""
+      },
+      "aiAnalysis": {
+        "rootCause": "The test is hitting GET https://apipris.secondmind.com.br/health, but that endpoint returns 404 immediately with an empty body. The most likely cause is that the backend target is misconfigured or not deployed with a /health route at that host, so the runner-script check cannot reach the expected service.",
+        "severity": "high",
+        "suggestion": "Verify that the correct backend environment is deployed and that the /health route exists on apipris.secondmind.com.br. If the health endpoint moved, update the test target/base path; if the service is missing, fix the deployment or reverse-proxy routing.",
+        "category": "configuration"
+      }
+    },
+    {
+      "id": "backend-target-real-check-init-file-exists-api-check",
+      "type": "api",
+      "name": "Backend target: real-check:init-file-exists",
+      "status": "failed",
+      "expected": "HTTP 200",
+      "actual": "HTTP 404 — \"\"",
+      "durationMs": 1128,
+      "aiConfidence": 0.7,
+      "evidence": {
+        "logs": [
+          "GET https://apipris.secondmind.com.br/health",
+          "Response: 404 in 1127ms",
+          "Response body: \"\"",
+          "Status mismatch: expected 200, got 404"
+        ],
+        "responseBody": ""
+      },
+      "aiAnalysis": {
+        "rootCause": "This failure has the same signature as the other checks: the shared health request to /health returns 404, so the init-file existence validation is failing because the target backend endpoint itself is unreachable at the expected path. This points to a shared environment or routing issue rather than a problem specific to the init-file check.",
+        "severity": "high",
+        "suggestion": "Confirm the API gateway/proxy mapping for /health and validate the active deployment on the target host. If the endpoint is intentionally absent, update the check to the correct health URL; otherwise restore the route in the deployed service.",
+        "category": "configuration"
+      }
+    },
+    {
+      "id": "backend-target-real-check-agent-scorecard-api-check",
+      "type": "api",
+      "name": "Backend target: real-check:agent-scorecard",
+      "status": "failed",
+      "expected": "HTTP 200",
+      "actual": "HTTP 404 — \"\"",
+      "durationMs": 12,
+      "aiConfidence": 0.7,
+      "evidence": {
+        "logs": [
+          "GET https://apipris.secondmind.com.br/health",
+          "Response: 404 in 11ms",
+          "Response body: \"\"",
+          "Status mismatch: expected 200, got 404"
+        ],
+        "responseBody": ""
+      },
+      "aiAnalysis": {
+        "rootCause": "The agent-scorecard check is failing for the same reason as the other two tests: the test harness receives HTTP 404 from /health on the target host. The most likely root cause is an incorrect environment configuration or a missing backend route, causing all dependent checks to fail before they can validate any artifact-specific behavior.",
+        "severity": "high",
+        "suggestion": "Check the deployed service and ingress configuration for apipris.secondmind.com.br, especially the /health route. Add a preflight smoke test for the health endpoint so these checks fail earlier with a clearer environment-level diagnosis.",
+        "category": "configuration"
+      }
+    }
+  ],
+  "aiInsights": [
+    "The test run failed completely: 0 of 3 cases passed, producing a Quality Score of 37/100. That score indicates the build is below an acceptable quality threshold and likely has blocking issues that need investigation before release or further validation.",
+    "All three failures share the exact same request and status code, which strongly indicates a single systemic issue rather than three independent test defects.",
+    "The responses are fast 404s with empty bodies, which points to routing or deployment misconfiguration, not performance degradation or flaky behavior.",
+    "The test names imply different validations, but the logs show they are all blocked at the same backend health check, so the suite is not reaching the intended assertion points.",
+    "This run has low diagnostic value for the individual feature checks because the environment-level failure masks any product-specific behavior.",
+    "A dedicated preflight check for the target host and health endpoint would improve reliability and make future failures easier to classify."
+  ],
+  "artifacts": {
+    "reportJsonPath": "D:\\RovisMark5\\.cursor\\testing-module\\reports\\ai-final-report.json",
+    "reportHtmlPath": "D:\\RovisMark5\\.cursor\\testing-module\\reports\\ai-final-report.html",
+    "activityLogPath": "D:\\RovisMark5\\.cursor\\testing-module\\reports\\ai-activity-log.md"
+  }
+}

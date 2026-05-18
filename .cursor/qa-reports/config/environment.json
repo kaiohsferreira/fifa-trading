@@ -1,0 +1,17 @@
+{
+  "activeEnvironment": "local-secondacademy",
+  "environments": {
+    "local-secondacademy": {
+      "frontendUrl": "http://localhost:5173",
+      "backendUrl": "https://apipris.secondmind.com.br",
+      "notes": "Configuracao informada pelo usuario em 2026-04-06."
+    }
+  },
+  "rules": {
+    "confirmAtStartOfTest": true,
+    "confirmationPrompt": "Confirmar antes de iniciar cada bateria: frontendUrl e backendUrl continuam corretas?",
+    "qaReportRoot": ".cursor/qa-reports",
+    "scopeFolderPattern": ".cursor/qa-reports/<YYYY-MM-DD>-<escopo>/",
+    "plansFolderRule": "Os planejamentos ficam dentro de <scope>/plans/. HTML, JSON e screenshots ficam na raiz do escopo em <scope>/html, <scope>/json e <scope>/screenshots."
+  }
+}

@@ -1,0 +1,22 @@
+﻿{
+    "generatedAt":  "2026-04-20T09:18:00.2471183-03:00",
+    "url":  "http://localhost:3000/",
+    "pageName":  "http---localhost-3000",
+    "wcagLevel":  "AA",
+    "budget":  {
+                   "maxCritical":  0,
+                   "maxSerious":  0,
+                   "maxModerate":  5,
+                   "maxMinor":  20,
+                   "wcagLevel":  "AA"
+               },
+    "violations":  {
+                       "critical":  null,
+                       "serious":  null,
+                       "moderate":  null,
+                       "minor":  null
+                   },
+    "blocked":  false,
+    "status":  "pending-mcp-execution",
+    "instructions":  "FE_EXECUTOR via chrome-devtools MCP: 1) abrir Url 2) injetar axe-core 3) preencher violations.{critical,serious,moderate,minor} 4) chamar este script com -PostExec se desejar avaliacao"
+}

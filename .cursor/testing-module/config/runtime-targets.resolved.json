@@ -1,0 +1,39 @@
+﻿{
+    "resolvedAt":  "2026-05-05T09:02:43.8276960-03:00",
+    "workspaceRoot":  "C:\\Users\\Matheus\\source\\repos\\ABPAC",
+    "activeEnvironment":  "local-secondacademy",
+    "backendUrl":  "http://localhost:33422",
+    "frontendUrl":  "http://localhost:5173",
+    "swaggerUiUrl":  "http://localhost:33422/swagger",
+    "swaggerJsonUrl":  "http://localhost:33422/swagger/v1/swagger.json",
+    "swaggerDetected":  true,
+    "swaggerDocument":  {
+                            "title":  "",
+                            "version":  "",
+                            "pathCount":  0
+                        },
+    "sourceOfTruth":  {
+                          "backend":  "workspace",
+                          "frontend":  "workspace",
+                          "swagger":  "workspace-inferred"
+                      },
+    "confidence":  "high",
+    "evidence":  {
+                     "launchSettingsFiles":  [
+                                                 "C:\\Users\\Matheus\\source\\repos\\ABPAC\\ABPAC-BackEnd\\AlavTech.API\\Properties\\launchSettings.json",
+                                                 "C:\\Users\\Matheus\\source\\repos\\ABPAC\\ABPAC-BackEnd\\AlavTech.Integration\\Properties\\launchSettings.json"
+                                             ],
+                     "programFiles":  [
+                                          "C:\\Users\\Matheus\\source\\repos\\ABPAC\\ABPAC-BackEnd\\AlavTech.API\\Program.cs",
+                                          "C:\\Users\\Matheus\\source\\repos\\ABPAC\\ABPAC-BackEnd\\AlavTech.API\\Startup.cs",
+                                          "C:\\Users\\Matheus\\source\\repos\\ABPAC\\ABPAC-BackEnd\\AlavTech.Integration\\Program.cs",
+                                          "C:\\Users\\Matheus\\source\\repos\\ABPAC\\ABPAC-BackEnd\\AlavTech.Integration\\Startup.cs"
+                                      ],
+                     "packageFiles":  [
+                                          "C:\\Users\\Matheus\\source\\repos\\ABPAC\\ABPAC-FrontEnd\\package.json"
+                                      ],
+                     "viteConfigFiles":  [
+                                             "C:\\Users\\Matheus\\source\\repos\\ABPAC\\ABPAC-FrontEnd\\vite.config.ts"
+                                         ]
+                 }
+}

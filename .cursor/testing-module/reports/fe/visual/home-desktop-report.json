@@ -1,0 +1,15 @@
+﻿{
+    "generatedAt":  "2026-04-20T09:17:59.1767974-03:00",
+    "url":  "http://localhost:3000/",
+    "name":  "home",
+    "viewport":  "desktop",
+    "mode":  "create-baseline",
+    "baselinePath":  ".cursor\\testing-module\\reports\\fe\\visual\\baseline\\home-desktop.png",
+    "currentPath":  ".cursor\\testing-module\\reports\\fe\\visual\\diff\\home-desktop-current.png",
+    "diffPath":  ".cursor\\testing-module\\reports\\fe\\visual\\diff\\home-desktop-diff.png",
+    "diffPercent":  null,
+    "maxPercent":  1,
+    "status":  "baseline-needed",
+    "instructions":  "FE_EXECUTOR via chrome-devtools MCP: capturar screenshot em baselinePath (primeira execucao)",
+    "blocked":  false
+}

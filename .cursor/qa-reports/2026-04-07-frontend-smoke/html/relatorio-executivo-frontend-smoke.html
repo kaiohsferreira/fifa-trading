@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relatorio Executivo - Frontend Smoke ABPAC</title>
+  <style>
+    :root { --bg:#08111f; --panel:rgba(255,255,255,.08); --line:rgba(255,255,255,.14); --text:#eef4ff; --muted:#aab7ca; --cyan:#38bdf8; --teal:#5eead4; --gold:#fbbf24; --red:#fb7185; --green:#34d399; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--text); font-family:"Segoe UI",Arial,sans-serif; background:radial-gradient(circle at top left, rgba(56,189,248,.25), transparent 32%), linear-gradient(160deg, #07101d 0%, #0f172a 48%, #111827 100%); }
+    a { color:inherit; }
+    .shell { width:min(1280px, calc(100% - 32px)); margin:0 auto; padding:24px 0 56px; }
+    .hero, .panel { border:1px solid var(--line); border-radius:28px; background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.04)); box-shadow:0 24px 80px rgba(0,0,0,.34); }
+    .hero { padding:32px; position:relative; overflow:hidden; }
+    .hero::after { content:""; position:absolute; top:-120px; right:-80px; width:320px; height:320px; border-radius:50%; background:conic-gradient(from 180deg, var(--cyan), var(--teal), var(--gold), var(--cyan)); filter:blur(24px); opacity:.28; }
+    .hero-content { position:relative; z-index:1; }
+    .eyebrow { display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:999px; border:1px solid var(--line); background:rgba(15,23,42,.35); font-size:13px; font-weight:800; text-transform:uppercase; }
+    .eyebrow span { width:10px; height:10px; border-radius:50%; background:var(--gold); box-shadow:0 0 16px var(--gold); }
+    h1 { margin:18px 0 12px; font-size:clamp(40px, 7vw, 74px); line-height:.92; letter-spacing:-.06em; }
+    .hero p { max-width:860px; margin:0; color:var(--muted); font-size:18px; line-height:1.6; }
+    .links, .cards, .grid, .gallery { display:grid; gap:12px; }
+    .links { grid-template-columns:repeat(3, max-content); margin-top:20px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:0 14px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.08); text-decoration:none; font-weight:800; }
+    .primary { background:linear-gradient(135deg, var(--cyan), var(--teal)); color:#082033; border:0; }
+    .section { margin-top:18px; }
+    .cards { grid-template-columns:repeat(6, minmax(0,1fr)); }
+    .card, .item, .bug, .shot, .file-card { padding:18px; border:1px solid var(--line); border-radius:22px; background:rgba(255,255,255,.06); }
+    .card strong { display:block; font-size:28px; letter-spacing:-.05em; }
+    .card span, .item p, .bug p, .file-card p, .shot span { display:block; margin-top:8px; color:var(--muted); line-height:1.6; }
+    .grid { grid-template-columns:1.15fr .85fr; align-items:start; }
+    .panel { padding:22px; }
+    h2 { margin:0 0 14px; font-size:24px; letter-spacing:-.04em; }
+    .list, .timeline, .files, .bug-grid { display:grid; gap:12px; }
+    .item small, .bug small, .file-card small { color:var(--cyan); font-weight:800; text-transform:uppercase; }
+    table { width:100%; border-collapse:collapse; border:1px solid var(--line); border-radius:18px; overflow:hidden; }
+    th, td { padding:12px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; font-size:14px; }
+    th { background:rgba(255,255,255,.08); color:#dff6ff; font-size:12px; text-transform:uppercase; }
+    .status { display:inline-flex; min-width:74px; justify-content:center; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:900; }
+    .pass { background:rgba(52,211,153,.14); color:#bbf7d0; border:1px solid rgba(52,211,153,.4); }
+    .fail { background:rgba(251,113,133,.14); color:#fecdd3; border:1px solid rgba(251,113,133,.4); }
+    .skip { background:rgba(251,191,36,.14); color:#fde68a; border:1px solid rgba(251,191,36,.4); }
+    .bug-grid { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .bug ul { margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.6; }
+    .gallery { grid-template-columns:repeat(4, minmax(0,1fr)); }
+    .shot button { display:block; width:100%; border:0; padding:0; border-radius:14px; overflow:hidden; background:#020617; cursor:pointer; }
+    .shot img { width:100%; height:190px; object-fit:cover; display:block; }
+    .shot strong { display:block; margin-top:12px; font-size:15px; }
+    dialog { width:min(1100px, calc(100% - 24px)); border:1px solid var(--line); border-radius:24px; padding:0; background:#020817; color:var(--text); }
+    dialog::backdrop { background:rgba(2,6,23,.78); }
+    .modal-head { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--line); }
+    .modal-body { padding:18px; }
+    .modal-body img { width:100%; border-radius:18px; border:1px solid var(--line); }
+    @media (max-width:1100px) { .cards { grid-template-columns:repeat(3, minmax(0,1fr)); } .grid, .bug-grid { grid-template-columns:1fr; } .gallery { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+    @media (max-width:700px) { .cards { grid-template-columns:repeat(2, minmax(0,1fr)); } .gallery, .links { grid-template-columns:1fr; } .hero,.panel { border-radius:22px; } .hero { padding:24px; } h1 { font-size:42px; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow"><span></span> Frontend Smoke | 2026-04-07</div>
+        <h1>Smoke executivo do frontend ABPAC.</h1>
+        <p>O frontend local abriu, a tela publica ficou responsiva e a rota privada sem sessao continuou protegida. A rodada ficou parcialmente bloqueada por falha `500` no bootstrap de menu e por `401` na tentativa de login com a credencial de QA.</p>
+        <div class="links">
+          <a class="button primary" href="../README.md" target="_blank" rel="noreferrer">Abrir README</a>
+          <a class="button" href="../json/frontend-smoke-results.json" target="_blank" rel="noreferrer">Abrir JSON tecnico</a>
+          <a class="button" href="../screenshots/01-login-desktop.png" target="_blank" rel="noreferrer">Primeira evidencia</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cards">
+      <article class="card"><strong>10</strong><span>Total de checks</span></article>
+      <article class="card"><strong>7</strong><span>Passaram</span></article>
+      <article class="card"><strong>2</strong><span>Falharam</span></article>
+      <article class="card"><strong>1</strong><span>Skip</span></article>
+      <article class="card"><strong>8</strong><span>Screenshots</span></article>
+      <article class="card"><strong>72/100</strong><span>Quality Score | Acceptable</span></article>
+    </section>
+
+    <section class="section grid">
+      <article class="panel">
+        <h2>Contexto da execucao</h2>
+        <div class="list">
+          <div class="item"><small>Ambiente</small><p>Frontend: <code>http://localhost:5173</code><br>Backend/API: <code>https://saas-homolog-api.alav.cloud</code><br>Fonte de verdade: <code>.cursor/qa-reports/config/environment.json</code></p></div>
+          <div class="item"><small>Navegador e viewport</small><p>Chromium headless com evidencias em <code>1440x900</code>, <code>768x1024</code> e <code>390x844</code>.</p></div>
+          <div class="item"><small>Perfil usado</small><p>Credencial de teste configurada na engine de QA. A senha nao foi exibida em nenhum artefato.</p></div>
+          <div class="item"><small>Comando usado</small><p><code>node .cursor/qa-reports/2026-04-07-frontend-smoke/plans/run-frontend-smoke.mjs</code></p></div>
+        </div>
+      </article>
+      <article class="panel">
+        <h2>Timeline de prioridades</h2>
+        <div class="timeline">
+          <div class="item"><small>Prioridade 1</small><p>Corrigir o erro <code>500</code> em <code>/Menu/GetMenus?token=ASIDE</code>, que ja aparece no bootstrap da aplicacao.</p></div>
+          <div class="item"><small>Prioridade 2</small><p>Validar a credencial de QA e o motivo do <code>401</code> em <code>/Account/Login</code> para liberar o smoke autenticado.</p></div>
+          <div class="item"><small>Prioridade 3</small><p>Reexecutar a mesma bateria apos os ajustes para confirmar sessao, token e navegacao nas areas internas planejadas.</p></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section panel">
+      <h2>Matriz de checks</h2>
+      <table>
+        <thead><tr><th>ID</th><th>Check</th><th>Status</th><th>Rota/Tela</th><th>Esperado</th><th>Obtido</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr><td>QA-SMOKE-001</td><td>Login renderiza campos obrigatorios</td><td><span class="status pass">PASS</span></td><td>/</td><td>Campos de e-mail, senha, botao Entrar e recuperacao visiveis.</td><td>Todos os elementos ficaram visiveis.</td><td><a href="../screenshots/01-login-desktop.png" target="_blank" rel="noreferrer">01-login-desktop.png</a></td></tr>
+          <tr><td>QA-SMOKE-002</td><td>Login sem erro fatal de console</td><td><span class="status fail">FAIL</span></td><td>/</td><td>Nenhum erro fatal no carregamento inicial.</td><td>2 erros ligados a <code>Menu/GetMenus?token=ASIDE</code>.</td><td><a href="../screenshots/01-login-desktop.png" target="_blank" rel="noreferrer">01-login-desktop.png</a></td></tr>
+          <tr><td>QA-SMOKE-003</td><td>Recuperacao de senha renderiza</td><td><span class="status pass">PASS</span></td><td>/usuario/esqueceu_senha</td><td>Campo de e-mail e textos visiveis.</td><td>Tela abriu corretamente.</td><td><a href="../screenshots/02-forgot-password.png" target="_blank" rel="noreferrer">02-forgot-password.png</a></td></tr>
+          <tr><td>QA-SMOKE-004</td><td>Rota privada sem sessao nao expoe dashboard</td><td><span class="status pass">PASS</span></td><td>/adm/dashboard</td><td>Bloqueio ou redirecionamento.</td><td>Rota voltou para <code>/</code> sem expor conteudo interno.</td><td><a href="../screenshots/03-private-dashboard-without-session.png" target="_blank" rel="noreferrer">03-private-dashboard-without-session.png</a></td></tr>
+          <tr><td>QA-SMOKE-005</td><td>Login chama Account/Login sem erro 5xx</td><td><span class="status pass">PASS</span></td><td>/</td><td>Resposta abaixo de 500.</td><td><code>/Account/Login</code> respondeu <code>401</code>.</td><td><a href="../screenshots/04-login-filled.png" target="_blank" rel="noreferrer">04-login-filled.png</a></td></tr>
+          <tr><td>QA-SMOKE-006</td><td>Login aceito cria sessao</td><td><span class="status fail">FAIL</span></td><td>pos-login</td><td>Sessao/token presentes apos autenticar.</td><td>Sem token em storage e sem cookie de sessao.</td><td><a href="../screenshots/05-post-login.png" target="_blank" rel="noreferrer">05-post-login.png</a></td></tr>
+          <tr><td>QA-SMOKE-007</td><td>Rotas internas autenticadas</td><td><span class="status skip">SKIP</span></td><td>rotas internas</td><td>Smoke interno apos login valido.</td><td>Bloqueado porque a sessao nao foi criada.</td><td>N/A</td></tr>
+          <tr><td>QA-SMOKE-008.desktop</td><td>Responsivo login desktop</td><td><span class="status pass">PASS</span></td><td>/</td><td>Campos visiveis no viewport.</td><td>OK em 1440x900.</td><td><a href="../screenshots/responsive-desktop.png" target="_blank" rel="noreferrer">responsive-desktop.png</a></td></tr>
+          <tr><td>QA-SMOKE-008.tablet</td><td>Responsivo login tablet</td><td><span class="status pass">PASS</span></td><td>/</td><td>Campos visiveis no viewport.</td><td>OK em 768x1024.</td><td><a href="../screenshots/responsive-tablet.png" target="_blank" rel="noreferrer">responsive-tablet.png</a></td></tr>
+          <tr><td>QA-SMOKE-008.mobile</td><td>Responsivo login mobile</td><td><span class="status pass">PASS</span></td><td>/</td><td>Campos visiveis no viewport.</td><td>OK em 390x844.</td><td><a href="../screenshots/responsive-mobile.png" target="_blank" rel="noreferrer">responsive-mobile.png</a></td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="section panel">
+      <h2>Bugs detalhados para QA</h2>
+      <div class="bug-grid">
+        <article class="bug">
+          <small>QA-FE-002 | Alta | Aberto</small>
+          <p><strong>Area/tela:</strong> Login / bootstrap inicial<br><strong>Pre-condicoes:</strong> frontend local disponivel e backend homologado confirmado<br><strong>Massa:</strong> sem dependencia de login para reproduzir</p>
+          <ul>
+            <li><strong>Passos para reproduzir:</strong> abrir <code>/</code> e observar console e network no carregamento inicial.</li>
+            <li><strong>Resultado esperado:</strong> a tela de login deve carregar sem erro fatal de console.</li>
+            <li><strong>Resultado obtido:</strong> houve duas falhas <code>500</code> em <code>GET /Menu/GetMenus?token=ASIDE</code>.</li>
+            <li><strong>Sintoma:</strong> erro de console durante o bootstrap do frontend.</li>
+            <li><strong>Evidencia tecnica:</strong> screenshot <code>01-login-desktop.png</code> e JSON tecnico da rodada.</li>
+            <li><strong>Impacto para a pessoa usuaria:</strong> o sistema pode iniciar com menu quebrado ou comportamento instavel antes da autenticacao.</li>
+            <li><strong>Hipotese de causa provavel:</strong> dependencia de menu lateral indisponivel ou endpoint backend com erro interno.</li>
+            <li><strong>Proxima acao recomendada:</strong> analisar logs do backend e validar o contrato/parametro `ASIDE` no endpoint de menu.</li>
+          </ul>
+        </article>
+        <article class="bug">
+          <small>QA-AUTH-001 | Alta | Aberto</small>
+          <p><strong>Area/tela:</strong> Autenticacao<br><strong>Pre-condicoes:</strong> credencial de teste carregada na engine de QA<br><strong>Massa:</strong> usuario de teste configurado; senha omitida</p>
+          <ul>
+            <li><strong>Passos para reproduzir:</strong> abrir <code>/</code>, preencher credenciais de QA e clicar em Entrar.</li>
+            <li><strong>Resultado esperado:</strong> a autenticacao deve retornar sucesso e criar sessao/token.</li>
+            <li><strong>Resultado obtido:</strong> <code>POST /Account/Login</code> respondeu <code>401</code> e nao houve sessao na aplicacao.</li>
+            <li><strong>Sintoma:</strong> a URL permaneceu em <code>/</code> e o smoke autenticado foi bloqueado.</li>
+            <li><strong>Evidencia tecnica:</strong> screenshot <code>05-post-login.png</code>, JSON tecnico e resposta HTTP <code>401</code>.</li>
+            <li><strong>Impacto para a pessoa usuaria:</strong> a pessoa usuaria de teste nao consegue entrar no sistema e as rotas internas ficam sem validacao.</li>
+            <li><strong>Hipotese de causa provavel:</strong> credencial de QA invalida, expiracao do usuario de teste ou regra de autenticacao alterada.</li>
+            <li><strong>Proxima acao recomendada:</strong> validar a conta de teste e repetir o smoke apos restaurar login bem-sucedido.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section grid">
+      <article class="panel">
+        <h2>Eventos tecnicos</h2>
+        <table>
+          <thead><tr><th>Tipo</th><th>Evento</th><th>Impacto</th></tr></thead>
+          <tbody>
+            <tr><td>Console error</td><td><code>GET /Menu/GetMenus?token=ASIDE -> 500</code> apareceu duas vezes durante a carga do login.</td><td>Falha no bootstrap e degradacao do score.</td></tr>
+            <tr><td>HTTP 401</td><td><code>POST /Account/Login -> 401</code> na tentativa com a credencial de QA.</td><td>Sem sessao; smoke autenticado nao executado.</td></tr>
+            <tr><td>Observacao de ambiente</td><td>Reexecucao local nesta sessao falhou por <code>EPERM</code> do `node` ao resolver o workspace em `OneDrive`.</td><td>Bloqueio da automacao local, nao evidencia de defeito do produto.</td></tr>
+          </tbody>
+        </table>
+      </article>
+      <article class="panel">
+        <h2>Arquivos tecnicos</h2>
+        <div class="files">
+          <div class="file-card"><small>README</small><p><a href="../README.md" target="_blank" rel="noreferrer">Resumo executivo da rodada</a></p></div>
+          <div class="file-card"><small>JSON</small><p><a href="../json/frontend-smoke-results.json" target="_blank" rel="noreferrer">frontend-smoke-results.json</a></p></div>
+          <div class="file-card"><small>Plano</small><p><a href="../plans/qa-plan.md" target="_blank" rel="noreferrer">qa-plan.md</a></p></div>
+          <div class="file-card"><small>Central</small><p><a href="../../index.html" target="_blank" rel="noreferrer">Central de relatorios QA</a></p></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section panel">
+      <h2>Galeria de evidencias</h2>
+      <div class="gallery">
+        <article class="shot"><button type="button" data-label="Login desktop" data-image="../screenshots/01-login-desktop.png"><img src="../screenshots/01-login-desktop.png" alt="Login desktop"></button><strong>Login desktop</strong><span>Carga inicial da tela publica.</span></article>
+        <article class="shot"><button type="button" data-label="Recuperacao de senha" data-image="../screenshots/02-forgot-password.png"><img src="../screenshots/02-forgot-password.png" alt="Recuperacao de senha"></button><strong>Recuperacao de senha</strong><span>Renderizacao do fluxo publico alternativo.</span></article>
+        <article class="shot"><button type="button" data-label="Rota privada sem sessao" data-image="../screenshots/03-private-dashboard-without-session.png"><img src="../screenshots/03-private-dashboard-without-session.png" alt="Rota privada sem sessao"></button><strong>Rota privada sem sessao</strong><span>Protecao de acesso funcionou sem token.</span></article>
+        <article class="shot"><button type="button" data-label="Resultado apos login" data-image="../screenshots/05-post-login.png"><img src="../screenshots/05-post-login.png" alt="Resultado apos login"></button><strong>Resultado apos login</strong><span>Sessao nao foi criada apos a tentativa de autenticar.</span></article>
+        <article class="shot"><button type="button" data-label="Desktop responsivo" data-image="../screenshots/responsive-desktop.png"><img src="../screenshots/responsive-desktop.png" alt="Desktop responsivo"></button><strong>Desktop</strong><span>Viewport 1440x900.</span></article>
+        <article class="shot"><button type="button" data-label="Tablet responsivo" data-image="../screenshots/responsive-tablet.png"><img src="../screenshots/responsive-tablet.png" alt="Tablet responsivo"></button><strong>Tablet</strong><span>Viewport 768x1024.</span></article>
+        <article class="shot"><button type="button" data-label="Mobile responsivo" data-image="../screenshots/responsive-mobile.png"><img src="../screenshots/responsive-mobile.png" alt="Mobile responsivo"></button><strong>Mobile</strong><span>Viewport 390x844.</span></article>
+        <article class="shot"><button type="button" data-label="Login preenchido" data-image="../screenshots/04-login-filled.png"><img src="../screenshots/04-login-filled.png" alt="Login preenchido"></button><strong>Login preenchido</strong><span>Credenciais omitidas no relatorio.</span></article>
+      </div>
+    </section>
+
+    <section class="section panel">
+      <h2>Proximas acoes</h2>
+      <div class="list">
+        <div class="item"><small>Correcao recomendada</small><p>Investigar backend de menu e autenticacao antes da proxima liberacao do frontend homologado.</p></div>
+        <div class="item"><small>Bateria a reexecutar</small><p>Repetir este mesmo <code>frontend-smoke</code> com foco em login aceito, token persistido e visita das rotas internas planejadas.</p></div>
+        <div class="item"><small>Risco residual</small><p>As areas internas seguem sem validacao funcional nesta rodada porque a autenticacao nao foi concluida com sucesso.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="imageModal" aria-label="Visualizador de evidencia">
+    <div class="modal-head">
+      <strong id="modalTitle">Evidencia</strong>
+      <button class="button" type="button" id="closeModal">Fechar</button>
+    </div>
+    <div class="modal-body"><img id="modalImage" alt="Evidencia ampliada"></div>
+  </dialog>
+
+  <script>
+    const modal = document.getElementById('imageModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalImage = document.getElementById('modalImage');
+    document.querySelectorAll('[data-image]').forEach((button) => {
+      button.addEventListener('click', () => {
+        modalTitle.textContent = button.dataset.label || 'Evidencia';
+        modalImage.src = button.dataset.image;
+        modalImage.alt = button.dataset.label || 'Evidencia';
+        modal.showModal();
+      });
+    });
+    document.getElementById('closeModal').addEventListener('click', () => modal.close());
+    modal.addEventListener('click', (event) => {
+      const rect = modal.getBoundingClientRect();
+      const inside = rect.top <= event.clientY && event.clientY <= rect.bottom && rect.left <= event.clientX && event.clientX <= rect.right;
+      if (!inside) modal.close();
+    });
+  </script>
+</body>
+</html>

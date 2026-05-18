@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relatorio Executivo - QA-SMOKE-006</title>
+  <style>
+    :root { --bg:#08111f; --panel:rgba(255,255,255,.08); --line:rgba(255,255,255,.14); --text:#eef4ff; --muted:#aab7ca; --cyan:#38bdf8; --teal:#5eead4; --gold:#fbbf24; --green:#34d399; --red:#fb7185; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--text); font-family:"Segoe UI",Arial,sans-serif; background:radial-gradient(circle at top left, rgba(56,189,248,.25), transparent 32%), linear-gradient(160deg, #07101d 0%, #0f172a 48%, #111827 100%); }
+    a { color:inherit; }
+    .shell { width:min(1280px, calc(100% - 32px)); margin:0 auto; padding:24px 0 56px; }
+    .hero,.panel { border:1px solid var(--line); border-radius:28px; background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.04)); box-shadow:0 24px 80px rgba(0,0,0,.34); }
+    .hero { padding:32px; position:relative; overflow:hidden; }
+    .hero::after { content:""; position:absolute; top:-120px; right:-80px; width:320px; height:320px; border-radius:50%; background:conic-gradient(from 180deg, var(--cyan), var(--teal), var(--gold), var(--cyan)); filter:blur(24px); opacity:.28; }
+    .hero-content { position:relative; z-index:1; }
+    .eyebrow { display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:999px; border:1px solid var(--line); background:rgba(15,23,42,.35); font-size:13px; font-weight:800; text-transform:uppercase; }
+    .eyebrow span { width:10px; height:10px; border-radius:50%; background:var(--green); box-shadow:0 0 16px var(--green); }
+    h1 { margin:18px 0 12px; font-size:clamp(40px, 7vw, 72px); line-height:.92; letter-spacing:-.06em; }
+    .hero p { max-width:860px; margin:0; color:var(--muted); font-size:18px; line-height:1.6; }
+    .links,.cards,.grid,.gallery,.list { display:grid; gap:12px; }
+    .links { grid-template-columns:repeat(3, max-content); margin-top:20px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:0 14px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.08); text-decoration:none; font-weight:800; }
+    .primary { background:linear-gradient(135deg, var(--cyan), var(--teal)); color:#082033; border:0; }
+    .section { margin-top:18px; }
+    .cards { grid-template-columns:repeat(5, minmax(0,1fr)); }
+    .card,.item,.shot,.file-card,.bug { padding:18px; border:1px solid var(--line); border-radius:22px; background:rgba(255,255,255,.06); }
+    .card strong { display:block; font-size:28px; letter-spacing:-.05em; }
+    .card span,.item p,.shot span,.file-card p,.bug p { display:block; margin-top:8px; color:var(--muted); line-height:1.6; }
+    .panel { padding:22px; }
+    .grid { grid-template-columns:1.1fr .9fr; align-items:start; }
+    h2 { margin:0 0 14px; font-size:24px; letter-spacing:-.04em; }
+    .item small,.file-card small,.bug small { color:var(--cyan); font-weight:800; text-transform:uppercase; }
+    table { width:100%; border-collapse:collapse; border:1px solid var(--line); border-radius:18px; overflow:hidden; }
+    th,td { padding:12px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; font-size:14px; }
+    th { background:rgba(255,255,255,.08); color:#dff6ff; font-size:12px; text-transform:uppercase; }
+    .status { display:inline-flex; min-width:74px; justify-content:center; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:900; }
+    .pass { background:rgba(52,211,153,.14); color:#bbf7d0; border:1px solid rgba(52,211,153,.4); }
+    .warn { background:rgba(251,191,36,.14); color:#fde68a; border:1px solid rgba(251,191,36,.4); }
+    .gallery { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .shot button { display:block; width:100%; border:0; padding:0; border-radius:14px; overflow:hidden; background:#020617; cursor:pointer; }
+    .shot img { width:100%; height:260px; object-fit:cover; display:block; }
+    .shot strong { display:block; margin-top:12px; font-size:15px; }
+    dialog { width:min(1100px, calc(100% - 24px)); border:1px solid var(--line); border-radius:24px; padding:0; background:#020817; color:var(--text); }
+    dialog::backdrop { background:rgba(2,6,23,.78); }
+    .modal-head { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--line); }
+    .modal-body { padding:18px; }
+    .modal-body img { width:100%; border-radius:18px; border:1px solid var(--line); }
+    @media (max-width:900px) { .cards { grid-template-columns:repeat(2, minmax(0,1fr)); } .grid,.gallery,.links { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow"><span></span> QA-SMOKE-006 | rerun 2026-04-07</div>
+        <h1>Login aceito cria sessao.</h1>
+        <p>O caso isolado passou com as credenciais informadas na conversa. O login respondeu <code>202</code>, redirecionou para <code>/adm/dashboard</code> e deixou cookie de autenticacao presente no navegador.</p>
+        <div class="links">
+          <a class="button primary" href="../README.md" target="_blank" rel="noreferrer">Abrir README</a>
+          <a class="button" href="../json/qa-smoke-006-result.json" target="_blank" rel="noreferrer">Abrir JSON tecnico</a>
+          <a class="button" href="../../index.html" target="_blank" rel="noreferrer">Central QA</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cards">
+      <article class="card"><strong>1</strong><span>Total de checks</span></article>
+      <article class="card"><strong>1</strong><span>Passaram</span></article>
+      <article class="card"><strong>0</strong><span>Falharam</span></article>
+      <article class="card"><strong>202</strong><span>Status do login</span></article>
+      <article class="card"><strong>100/100</strong><span>Quality Score | Excellent</span></article>
+    </section>
+
+    <section class="section grid">
+      <article class="panel">
+        <h2>Contexto da execucao</h2>
+        <div class="list">
+          <div class="item"><small>Ambiente</small><p>Frontend: <code>http://localhost:5173</code><br>Backend: <code>https://saas-homolog-api.alav.cloud</code></p></div>
+          <div class="item"><small>Perfil usado</small><p>Usuario <code>admsaas@uorak.com</code>. A senha nao foi exibida no relatorio.</p></div>
+          <div class="item"><small>Validacao de sessao</small><p>URL final em <code>/adm/dashboard</code> e fragmento de cookie de autenticacao detectado.</p></div>
+          <div class="item"><small>Estrategia de carga</small><p><code>domcontentloaded</code> com espera curta adicional, para evitar falso bloqueio por `networkidle` continuo.</p></div>
+        </div>
+      </article>
+      <article class="panel">
+        <h2>Timeline de prioridades</h2>
+        <div class="list">
+          <div class="item"><small>Validado</small><p>`QA-SMOKE-006` ficou aprovado para esta conta de teste.</p></div>
+          <div class="item"><small>Risco residual</small><p>Antes do login ainda houve respostas `500` em <code>Menu/GetMenus?token=ASIDE</code>.</p></div>
+          <div class="item"><small>Proximo passo</small><p>Se necessario, usar esta mesma conta para smoke de navegacao autenticada.</p></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section panel">
+      <h2>Matriz de checks</h2>
+      <table>
+        <thead><tr><th>ID</th><th>Check</th><th>Status</th><th>Rota/Tela</th><th>Esperado</th><th>Obtido</th><th>Evidencia</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>QA-SMOKE-006</td>
+            <td>Login aceito cria sessao</td>
+            <td><span class="status pass">PASS</span></td>
+            <td>pos-login</td>
+            <td>Autenticacao aceita e token/sessao presente.</td>
+            <td><code>status=202</code>, URL final em <code>/adm/dashboard</code> e <code>cookieToken=1</code>.</td>
+            <td><a href="../screenshots/qa-smoke-006-after-submit.png" target="_blank" rel="noreferrer">qa-smoke-006-after-submit.png</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section panel">
+      <h2>Bugs detalhados para QA</h2>
+      <div class="bug">
+        <small>Sem bug bloqueante neste caso</small>
+        <p>O objetivo desta rodada era validar somente a criacao de sessao apos login, e esse objetivo passou. Como observacao tecnica, ainda houve `500` no carregamento inicial de `Menu/GetMenus?token=ASIDE`, mas isso nao impediu o sucesso do caso isolado.</p>
+      </div>
+    </section>
+
+    <section class="section grid">
+      <article class="panel">
+        <h2>Eventos tecnicos</h2>
+        <table>
+          <thead><tr><th>Tipo</th><th>Evento</th><th>Impacto</th></tr></thead>
+          <tbody>
+            <tr><td>HTTP</td><td><code>POST /Account/Login -> 202</code></td><td>Autenticacao aceita.</td></tr>
+            <tr><td>Rota final</td><td><code>http://localhost:5173/adm/dashboard</code></td><td>Redirecionamento para area autenticada.</td></tr>
+            <tr><td>Observacao</td><td><code>GET /Menu/GetMenus?token=ASIDE -> 500</code> antes do submit; depois do login as chamadas de menu responderam <code>200</code>.</td><td>Risco residual fora do escopo principal deste caso.</td></tr>
+          </tbody>
+        </table>
+      </article>
+      <article class="panel">
+        <h2>Arquivos tecnicos</h2>
+        <div class="list">
+          <div class="file-card"><small>README</small><p><a href="../README.md" target="_blank" rel="noreferrer">Resumo executivo da rodada</a></p></div>
+          <div class="file-card"><small>JSON</small><p><a href="../json/qa-smoke-006-result.json" target="_blank" rel="noreferrer">qa-smoke-006-result.json</a></p></div>
+          <div class="file-card"><small>Plano</small><p><a href="../plans/qa-plan.md" target="_blank" rel="noreferrer">qa-plan.md</a></p></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section panel">
+      <h2>Galeria de evidencias</h2>
+      <div class="gallery">
+        <article class="shot"><button type="button" data-label="Antes do submit" data-image="../screenshots/qa-smoke-006-before-submit.png"><img src="../screenshots/qa-smoke-006-before-submit.png" alt="Antes do submit"></button><strong>Antes do submit</strong><span>Formulario preenchido com a senha omitida do relatorio.</span></article>
+        <article class="shot"><button type="button" data-label="Depois do submit" data-image="../screenshots/qa-smoke-006-after-submit.png"><img src="../screenshots/qa-smoke-006-after-submit.png" alt="Depois do submit"></button><strong>Depois do submit</strong><span>Dashboard administrativo apos autenticacao.</span></article>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="imageModal" aria-label="Visualizador de evidencia">
+    <div class="modal-head">
+      <strong id="modalTitle">Evidencia</strong>
+      <button class="button" type="button" id="closeModal">Fechar</button>
+    </div>
+    <div class="modal-body"><img id="modalImage" alt="Evidencia ampliada"></div>
+  </dialog>
+
+  <script>
+    const modal = document.getElementById('imageModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalImage = document.getElementById('modalImage');
+    document.querySelectorAll('[data-image]').forEach((button) => {
+      button.addEventListener('click', () => {
+        modalTitle.textContent = button.dataset.label || 'Evidencia';
+        modalImage.src = button.dataset.image;
+        modalImage.alt = button.dataset.label || 'Evidencia';
+        modal.showModal();
+      });
+    });
+    document.getElementById('closeModal').addEventListener('click', () => modal.close());
+  </script>
+</body>
+</html>

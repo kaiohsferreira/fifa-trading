@@ -1,0 +1,168 @@
+{
+  "success": false,
+  "generatedAt": "2026-04-06T18:27:11.724Z",
+  "runMode": "all",
+  "targetBaseUrl": "https://api.secondacademy.com.br",
+  "summary": {
+    "totalCases": 5,
+    "passed": 2,
+    "failed": 3,
+    "skipped": 0,
+    "errored": 0,
+    "durationMs": 53353,
+    "passRate": 0.4
+  },
+  "qualityScore": {
+    "total": 58,
+    "band": "warning",
+    "breakdown": {
+      "passRate": 0.4,
+      "passRateScore": 20,
+      "aiConfidenceAvg": 0.8,
+      "aiConfidenceScore": 16,
+      "realCasesRatio": 0.6,
+      "realCasesScore": 12,
+      "coverageBreadth": 1,
+      "coverageBreadthScore": 10
+    }
+  },
+  "results": [
+    {
+      "id": "default-api-login",
+      "type": "api",
+      "name": "Default: API login and get token",
+      "status": "failed",
+      "expected": "HTTP 200",
+      "actual": "HTTP 404 — \"\"",
+      "durationMs": 147,
+      "aiConfidence": 0.8,
+      "evidence": {
+        "logs": [
+          "POST https://api.secondacademy.com.br/api/auth/login",
+          "Request body: {\"email\":\"testuser@example.com\",\"password\":\"Test@1234\"}",
+          "Response: 404 in 144ms",
+          "Response body: \"\"",
+          "Status mismatch: expected 200, got 404"
+        ],
+        "requestBody": {
+          "email": "testuser@example.com",
+          "password": "Test@1234"
+        },
+        "responseBody": ""
+      },
+      "aiAnalysis": {
+        "rootCause": "The login request is reaching a live host, but the `/api/auth/login` route does not exist there and returns HTTP 404. This most likely means the API base URL or route prefix is misconfigured, or the backend deployment is missing the authentication endpoint.",
+        "severity": "critical",
+        "suggestion": "Verify the deployed backend exposes `/api/auth/login` on `https://api.secondacademy.com.br`, and check gateway/reverse-proxy route mappings, environment variables for API base paths, and the auth service deployment status.",
+        "category": "configuration"
+      }
+    },
+    {
+      "id": "default-health-check",
+      "type": "api",
+      "name": "Default: API health check",
+      "status": "failed",
+      "expected": "HTTP 200",
+      "actual": "HTTP 404 — \"\"",
+      "durationMs": 40,
+      "aiConfidence": 0.5,
+      "evidence": {
+        "logs": [
+          "GET https://api.secondacademy.com.br/health",
+          "Response: 404 in 40ms",
+          "Response body: \"\"",
+          "Status mismatch: expected 200, got 404"
+        ],
+        "responseBody": ""
+      },
+      "aiAnalysis": {
+        "rootCause": "The health-check endpoint `/health` also returns HTTP 404, which strongly indicates the test environment is pointing at the wrong server or the backend deployment is incomplete/misrouted. A healthy API should expose a health endpoint, so this is not a transient test issue.",
+        "severity": "critical",
+        "suggestion": "Confirm the correct health endpoint for this environment and fix the deployment or routing configuration so `/health` resolves on the expected API host. If the endpoint was renamed, update the test to the canonical path.",
+        "category": "configuration"
+      }
+    },
+    {
+      "id": "default-email-required",
+      "type": "field_validation",
+      "name": "Default: email field required validation",
+      "status": "passed",
+      "expected": "Valid value passes rule \"required\", invalid value fails",
+      "actual": "Valid value passes, invalid value fails as expected",
+      "durationMs": 0,
+      "aiConfidence": 0.9,
+      "evidence": {
+        "logs": [
+          "Field: email | Rule: required",
+          "Valid value: \"user@example.com\"",
+          "Invalid value: \"\""
+        ]
+      }
+    },
+    {
+      "id": "default-cpf-mask",
+      "type": "mask_validation",
+      "name": "Default: CPF mask validation",
+      "status": "passed",
+      "expected": "Valid samples match pattern; invalid samples do not",
+      "actual": "All 1 valid + 2 invalid samples passed",
+      "durationMs": 0,
+      "aiConfidence": 0.95,
+      "evidence": {
+        "logs": [
+          "Mask field: cpf",
+          "Pattern: ^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$",
+          "PASS: Valid sample \"123.456.789-10\" matches pattern",
+          "PASS: Invalid sample \"12345678910\" correctly rejected",
+          "PASS: Invalid sample \"123.456.789-1\" correctly rejected"
+        ]
+      }
+    },
+    {
+      "id": "default-login-flow",
+      "type": "browser_flow",
+      "name": "Default: login and verify authenticated state",
+      "status": "failed",
+      "expected": "All flow steps complete without errors",
+      "actual": "Not authenticated — indicator not found: [data-user], .user-menu, .avatar, #profile, .logout-btn, button:has-text('Sair'), button:has-text('Logout')",
+      "durationMs": 40235,
+      "aiConfidence": 0.85,
+      "evidence": {
+        "logs": [
+          "Starting browser flow: Default: login and verify authenticated state",
+          "[console.error] Failed to load resource: the server responded with a status of 404 ()",
+          "Navigated to: https://api.secondacademy.com.br",
+          "Navigated to login: http://localhost:8080/login",
+          "Filled username (input[type=email], input[name=email], input[name=username], #email, #username)",
+          "Filled password",
+          "Clicked submit",
+          "[auth] Browser state saved to: D:\\secondmind\\Teste\\.cursor\\testing-module\\ai-engine\\.cursor\\testing-module\\reports\\session\\browser-state.json",
+          "[FAILED] Not authenticated — indicator not found: [data-user], .user-menu, .avatar, #profile, .logout-btn, button:has-text('Sair'), button:has-text('Logout')",
+          "Screenshot saved: D:\\secondmind\\Teste\\.cursor\\testing-module\\ai-engine\\.cursor\\testing-module\\reports\\playwright-artifacts\\screenshots\\default-login-flow-failure-1775500018566.png"
+        ],
+        "errorMessage": "Not authenticated — indicator not found: [data-user], .user-menu, .avatar, #profile, .logout-btn, button:has-text('Sair'), button:has-text('Logout')",
+        "screenshotPath": "D:\\secondmind\\Teste\\.cursor\\testing-module\\ai-engine\\.cursor\\testing-module\\reports\\playwright-artifacts\\screenshots\\default-login-flow-failure-1775500018566.png",
+        "tracePath": "D:\\secondmind\\Teste\\.cursor\\testing-module\\ai-engine\\.cursor\\testing-module\\reports\\playwright-artifacts\\traces\\default-login-flow-failure-1775500018674.zip"
+      },
+      "aiAnalysis": {
+        "rootCause": "The browser login flow likely failed because the backend authentication path is unavailable. Since the API login endpoint is returning 404, the UI cannot complete authentication and never renders an authenticated-user indicator.",
+        "severity": "critical",
+        "suggestion": "Fix the backend auth route or environment routing first, then rerun the browser flow. If the UI now uses a different auth success indicator or post-login redirect, update the selector/assertion to match the real authenticated state.",
+        "category": "environment"
+      }
+    }
+  ],
+  "aiInsights": [
+    "The test run shows weak overall quality: only 2 of 5 cases passed, with 3 failures, and a Quality Score of 58/100 indicates the build is below a reliable release threshold. This score suggests the implementation is partially working but still has significant defects, so the quality is not acceptable for release without further fixes and rerun validation.",
+    "Multiple failures point to the same underlying problem: the target environment is missing or misrouting core backend endpoints.",
+    "The API failures are deterministic 404s, which makes this look like a configuration/deployment issue rather than a flaky test.",
+    "The browser failure is likely a downstream consequence of the API auth failure, not an independent UI defect.",
+    "Test coverage is useful here because it caught both a direct API contract break and its user-facing login impact.",
+    "Before investigating the UI further, validate service routing and endpoint availability in the environment; otherwise the browser test will continue to fail for the same reason."
+  ],
+  "artifacts": {
+    "reportJsonPath": "D:\\secondmind\\Teste\\.cursor\\testing-module\\reports\\ai-final-report.json",
+    "reportHtmlPath": "D:\\secondmind\\Teste\\.cursor\\testing-module\\reports\\ai-final-report.html",
+    "activityLogPath": "D:\\secondmind\\Teste\\.cursor\\testing-module\\reports\\ai-activity-log.md"
+  }
+}

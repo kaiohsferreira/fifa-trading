@@ -1,0 +1,35 @@
+{
+  "mcpServers": {
+    "gemini": {
+      "command": "npx",
+      "args": ["-y", "@google/gemini-cli", "mcp"],
+      "env": {
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+      }
+    },
+    "codex": {
+      "command": "codex",
+      "args": ["--mcp-server"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}"
+      }
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["chrome-devtools-mcp@latest"]
+    },
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "figma-mcp"],
+      "env": {
+        "FIGMA_API_KEY": "figd_Gxc6KCHG8YsrndFno6izHc8hX0MldP-MUmMrwzC1"
+      }
+    },
+    "stitch": {
+      "url": "https://stitch.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key": "AQ.Ab8RN6LNQXmmwOWxbvAAOgDaC3CxM-cMiIDXUhVlCoLM3qsx9w"
+      }
+    }
+  }
+}

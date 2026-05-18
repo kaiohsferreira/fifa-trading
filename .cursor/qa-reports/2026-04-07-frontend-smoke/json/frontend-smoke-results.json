@@ -1,0 +1,1420 @@
+{
+  "metadata": {
+    "scope": "frontend-smoke",
+    "startedAt": "2026-04-07T13:37:01.068Z",
+    "frontendUrl": "http://localhost:5173",
+    "backendUrl": "https://saas-homolog-api.alav.cloud",
+    "browser": "chromium",
+    "credentialsProfile": "TEST_USERNAME from QA engine .env",
+    "passwordRecorded": false
+  },
+  "checks": [
+    {
+      "id": "QA-SMOKE-001",
+      "name": "Login renderiza campos obrigatorios",
+      "status": "pass",
+      "route": "/",
+      "expected": "Campos de e-mail/senha, botao Entrar e link de recuperacao visiveis.",
+      "obtained": "loaded=true; email=true; password=true; enter=true; forgot=true",
+      "evidence": "screenshots/01-login-desktop.png"
+    },
+    {
+      "id": "QA-SMOKE-002",
+      "name": "Login sem erro fatal de console",
+      "status": "fail",
+      "route": "/",
+      "expected": "Nenhum erro de console na carga inicial.",
+      "obtained": "2 erro(s) de console.",
+      "evidence": "screenshots/01-login-desktop.png"
+    },
+    {
+      "id": "QA-SMOKE-003",
+      "name": "Recuperacao de senha renderiza",
+      "status": "pass",
+      "route": "/usuario/esqueceu_senha",
+      "expected": "Campo de e-mail e textos da tela visiveis.",
+      "obtained": "email=true; text=true",
+      "evidence": "screenshots/02-forgot-password.png"
+    },
+    {
+      "id": "QA-SMOKE-004",
+      "name": "Rota privada sem sessao nao expoe dashboard",
+      "status": "pass",
+      "route": "/adm/dashboard",
+      "expected": "Usuario sem token deve ser redirecionado/bloqueado.",
+      "obtained": "url=http://localhost:5173/; hasLoginField=true",
+      "evidence": "screenshots/03-private-dashboard-without-session.png"
+    },
+    {
+      "id": "QA-SMOKE-005",
+      "name": "Login chama Account/Login sem erro 5xx",
+      "status": "pass",
+      "route": "/",
+      "expected": "Chamada de login retorna abaixo de 500.",
+      "obtained": "status=401",
+      "evidence": "screenshots/04-login-filled.png"
+    },
+    {
+      "id": "QA-SMOKE-006",
+      "name": "Login aceito cria sessao",
+      "status": "fail",
+      "route": "pos-login",
+      "expected": "Autenticacao aceita e token/sessao presente.",
+      "obtained": "url=http://localhost:5173/; token=false; cookieToken=0",
+      "evidence": "screenshots/05-post-login.png"
+    },
+    {
+      "id": "QA-SMOKE-007",
+      "name": "Rotas internas autenticadas",
+      "status": "skip",
+      "route": "rotas internas",
+      "expected": "Depende de login aceito.",
+      "obtained": "Login nao autenticado.",
+      "evidence": ""
+    },
+    {
+      "id": "QA-SMOKE-008.desktop",
+      "name": "Responsivo login desktop",
+      "status": "pass",
+      "route": "/",
+      "expected": "Campos principais visiveis no viewport.",
+      "obtained": "email=true; password=true; viewport=1440x900",
+      "evidence": "screenshots/responsive-desktop.png"
+    },
+    {
+      "id": "QA-SMOKE-008.tablet",
+      "name": "Responsivo login tablet",
+      "status": "pass",
+      "route": "/",
+      "expected": "Campos principais visiveis no viewport.",
+      "obtained": "email=true; password=true; viewport=768x1024",
+      "evidence": "screenshots/responsive-tablet.png"
+    },
+    {
+      "id": "QA-SMOKE-008.mobile",
+      "name": "Responsivo login mobile",
+      "status": "pass",
+      "route": "/",
+      "expected": "Campos principais visiveis no viewport.",
+      "obtained": "email=true; password=true; viewport=390x844",
+      "evidence": "screenshots/responsive-mobile.png"
+    }
+  ],
+  "bugs": [
+    {
+      "id": "QA-FE-002",
+      "severity": "Alta",
+      "status": "Aberto",
+      "area": "Login",
+      "profile": "usuario de teste configurado",
+      "preconditions": "Frontend local disponivel e backend homologado confirmado.",
+      "testData": "credencial de teste configurada; senha omitida",
+      "steps": [
+        "Abrir / e observar console do navegador."
+      ],
+      "expected": "Carregar sem erro fatal.",
+      "obtained": "2 erro(s) de console detectado(s).",
+      "symptom": "2 erro(s) de console detectado(s).",
+      "technicalEvidence": "[{\"type\":\"error\",\"text\":\"Failed to load resource: the server responded with a status of 500 ()\",\"location\":{\"url\":\"https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE\",\"lineNumber\":0,\"columnNumber\":0}},{\"type\":\"error\",\"text\":\"Failed to load resource: the server responded with a status of 500 ()\",\"location\":{\"url\":\"https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE\",\"lineNumber\":0,\"columnNumber\":0}}]",
+      "userImpact": "Pode haver quebra funcional ou comportamento instavel.",
+      "probableCause": "Erro JavaScript em runtime ou dependencia de ambiente ausente.",
+      "recommendation": "Corrigir erros de console e reexecutar smoke.",
+      "suggestedRegression": "Reexecutar smoke front-end e login apos correcao."
+    }
+  ],
+  "screenshots": [
+    {
+      "label": "Login desktop",
+      "path": "screenshots/01-login-desktop.png"
+    },
+    {
+      "label": "Recuperacao de senha",
+      "path": "screenshots/02-forgot-password.png"
+    },
+    {
+      "label": "Rota privada sem sessao",
+      "path": "screenshots/03-private-dashboard-without-session.png"
+    },
+    {
+      "label": "Login preenchido com senha omitida no relatorio",
+      "path": "screenshots/04-login-filled.png"
+    },
+    {
+      "label": "Resultado apos login",
+      "path": "screenshots/05-post-login.png"
+    },
+    {
+      "label": "Login desktop",
+      "path": "screenshots/responsive-desktop.png"
+    },
+    {
+      "label": "Login tablet",
+      "path": "screenshots/responsive-tablet.png"
+    },
+    {
+      "label": "Login mobile",
+      "path": "screenshots/responsive-mobile.png"
+    }
+  ],
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 732,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 826,
+        "columnNumber": 11
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=368a13e2",
+        "lineNumber": 17994,
+        "columnNumber": 53
+      }
+    },
+    {
+      "type": "log",
+      "text": "entrou no user info",
+      "location": {
+        "url": "http://localhost:5173/src/context/global/UserContext.tsx",
+        "lineNumber": 32,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "entrou no user info",
+      "location": {
+        "url": "http://localhost:5173/src/context/global/UserContext.tsx",
+        "lineNumber": 32,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 ()",
+      "location": {
+        "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 ()",
+      "location": {
+        "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 732,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 826,
+        "columnNumber": 11
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=368a13e2",
+        "lineNumber": 17994,
+        "columnNumber": 53
+      }
+    },
+    {
+      "type": "log",
+      "text": "entrou no user info",
+      "location": {
+        "url": "http://localhost:5173/src/context/global/UserContext.tsx",
+        "lineNumber": 32,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "entrou no user info",
+      "location": {
+        "url": "http://localhost:5173/src/context/global/UserContext.tsx",
+        "lineNumber": 32,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 ()",
+      "location": {
+        "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 ()",
+      "location": {
+        "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 732,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 826,
+        "columnNumber": 11
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=368a13e2",
+        "lineNumber": 17994,
+        "columnNumber": 53
+      }
+    },
+    {
+      "type": "log",
+      "text": "entrou no user info",
+      "location": {
+        "url": "http://localhost:5173/src/context/global/UserContext.tsx",
+        "lineNumber": 32,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "entrou no user info",
+      "location": {
+        "url": "http://localhost:5173/src/context/global/UserContext.tsx",
+        "lineNumber": 32,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 ()",
+      "location": {
+        "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 ()",
+      "location": {
+        "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 732,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 826,
+        "columnNumber": 11
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=368a13e2",
+        "lineNumber": 17994,
+        "columnNumber": 53
+      }
+    },
+    {
+      "type": "log",
+      "text": "entrou no user info",
+      "location": {
+        "url": "http://localhost:5173/src/context/global/UserContext.tsx",
+        "lineNumber": 32,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "entrou no user info",
+      "location": {
+        "url": "http://localhost:5173/src/context/global/UserContext.tsx",
+        "lineNumber": 32,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 ()",
+      "location": {
+        "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 ()",
+      "location": {
+        "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "location": {
+        "url": "https://saas-homolog-api.alav.cloud/Account/Login",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "failedRequests": [],
+  "responses": [
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/crm/adicionar/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/crm/editar/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/crm/lista/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/incomeExpense.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/incomeExpenseAgreement.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrence.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/budget.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmAssociateSelectorModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrence.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/utils/OccurrenceUtils.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderType.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderType.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrder.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/adm/tipos_de_os/components/OccurrenceWorkOrderTypeForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderModel.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderModel.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderModelUsageContext.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderModelUsageContext.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/adm/modelos_de_os/components/OccurrenceWorkOrderModelForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/adm/modelos_de_os/contextos_de_uso/components/OccurrenceWorkOrderModelUsageContextForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/crmFormPage.module.scss",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildAssociate/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/NotesModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/PricesModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/StatusModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildVehicle/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/QuoteActionsModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildQuote/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/AsideViewStructure/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceEvent.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrencePlateWorkshop.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrder.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/budgetAnnotation.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildAssociate/IndicatorModalSelector.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/QuoteActionsModal/quoteActionsModal.module.scss",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/AsideItensSteps/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceNote.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceThirdParty.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceThirdPartyAttachment.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceAttachment.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceCause.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceJudicialProcess.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceStatusHistory.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/ModalOS/layouts/OccurrenceSelectorModal.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceJudicialProcess.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceCause.ts",
+      "method": "GET"
+    },
+    {
+      "status": 500,
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "method": "GET"
+    },
+    {
+      "status": 500,
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/crm/adicionar/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/crm/editar/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/crm/lista/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrence.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/incomeExpense.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/incomeExpenseAgreement.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmAssociateSelectorModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/budget.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrence.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/utils/OccurrenceUtils.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderType.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderType.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrder.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/adm/tipos_de_os/components/OccurrenceWorkOrderTypeForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderModel.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderModel.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/adm/modelos_de_os/components/OccurrenceWorkOrderModelForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderModelUsageContext.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderModelUsageContext.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/pages/adm/modelos_de_os/contextos_de_uso/components/OccurrenceWorkOrderModelUsageContextForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/crmFormPage.module.scss",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/PricesModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/NotesModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/StatusModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildAssociate/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildVehicle/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildQuote/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/QuoteActionsModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/AsideViewStructure/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceEvent.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrencePlateWorkshop.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrder.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/budgetAnnotation.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/QuoteActionsModal/quoteActionsModal.module.scss",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/AsideItensSteps/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildAssociate/IndicatorModalSelector.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceNote.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceThirdParty.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceThirdPartyAttachment.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceAttachment.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceJudicialProcess.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceStatusHistory.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/services/occurrenceCause.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceJudicialProcess.ts",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/components/local/ModalOS/layouts/OccurrenceSelectorModal.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 200,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceCause.ts",
+      "method": "GET"
+    },
+    {
+      "status": 500,
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "method": "GET"
+    },
+    {
+      "status": 500,
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/crm/adicionar/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/crm/editar/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/crm/lista/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/incomeExpense.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/incomeExpenseAgreement.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrence.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/budget.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmAssociateSelectorModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrence.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/utils/OccurrenceUtils.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderType.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderType.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/adm/tipos_de_os/components/OccurrenceWorkOrderTypeForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrder.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderModel.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderModel.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/adm/modelos_de_os/components/OccurrenceWorkOrderModelForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderModelUsageContext.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderModelUsageContext.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/adm/modelos_de_os/contextos_de_uso/components/OccurrenceWorkOrderModelUsageContextForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/crmFormPage.module.scss",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildAssociate/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/NotesModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/PricesModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/StatusModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildVehicle/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildQuote/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/QuoteActionsModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/AsideViewStructure/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceEvent.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrencePlateWorkshop.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrder.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildAssociate/IndicatorModalSelector.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/budgetAnnotation.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/QuoteActionsModal/quoteActionsModal.module.scss",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/AsideItensSteps/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceNote.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceThirdParty.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceThirdPartyAttachment.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceAttachment.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceJudicialProcess.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceCause.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceStatusHistory.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/ModalOS/layouts/OccurrenceSelectorModal.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceJudicialProcess.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceCause.ts",
+      "method": "GET"
+    },
+    {
+      "status": 500,
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "method": "GET"
+    },
+    {
+      "status": 500,
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/crm/adicionar/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/crm/editar/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/crm/lista/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/incomeExpense.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/incomeExpenseAgreement.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrence.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/budget.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmAssociateSelectorModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrence.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/utils/OccurrenceUtils.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderType.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderType.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/adm/tipos_de_os/components/OccurrenceWorkOrderTypeForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrder.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderModel.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderModel.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/adm/modelos_de_os/components/OccurrenceWorkOrderModelForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrderModelUsageContext.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceWorkOrderModelUsageContext.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/pages/adm/modelos_de_os/contextos_de_uso/components/OccurrenceWorkOrderModelUsageContextForm.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/crmFormPage.module.scss",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildAssociate/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/NotesModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/PricesModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/StatusModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildVehicle/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildQuote/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/QuoteActionsModal/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/AsideViewStructure/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceEvent.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrencePlateWorkshop.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceWorkOrder.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/FormBuildAssociate/IndicatorModalSelector.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/budgetAnnotation.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/QuoteActionsModal/quoteActionsModal.module.scss",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/CrmFormPage/AsideItensSteps/index.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceNote.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceThirdParty.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceThirdPartyAttachment.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceAttachment.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceJudicialProcess.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceCause.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/services/occurrenceStatusHistory.service.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/components/local/ModalOS/layouts/OccurrenceSelectorModal.tsx",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceJudicialProcess.ts",
+      "method": "GET"
+    },
+    {
+      "status": 304,
+      "url": "http://localhost:5173/src/config/apiRoutes/occurrenceCause.ts",
+      "method": "GET"
+    },
+    {
+      "status": 500,
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "method": "GET"
+    },
+    {
+      "status": 500,
+      "url": "https://saas-homolog-api.alav.cloud/Menu/GetMenus?token=ASIDE",
+      "method": "GET"
+    },
+    {
+      "status": 401,
+      "url": "https://saas-homolog-api.alav.cloud/Account/Login",
+      "method": "POST"
+    }
+  ],
+  "summary": {
+    "finishedAt": "2026-04-07T13:37:28.120Z",
+    "totalChecks": 10,
+    "pass": 7,
+    "fail": 2,
+    "skip": 1,
+    "warnings": 0,
+    "qualityScore": 72,
+    "band": "Acceptable"
+  }
+}

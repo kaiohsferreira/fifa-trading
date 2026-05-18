@@ -1,0 +1,16 @@
+---
+description: Regras globais de persona para Backend
+globs: ABPAC-BackEnd/**/*
+---
+# Regra global de persona do backend
+
+Qualquer tarefa de backend deve obedecer ao arquivo persona master:
+`.cursor/agents/back-end/00_Master_Persona.md`
+
+Esse arquivo tem prioridade máxima para regras C#, Entity Framework e Swagger.
+
+## Regras de C# Adicionais (IA)
+A IA deve sempre:
+- **Tipos explicitos:** Nao usar `var` em hipotese alguma; declarar o tipo explicito em todas as variaveis locais.
+- **Datas:** Mapear e formatar datas usando `StaticMethods`. Nunca expor DateTime bruto em VOs de retorno sem formatação via helpers estáticos.
+- **Swagger:** Colocar `/// <summary>` em todos os métodos de API expostos no Swagger, descrevendo o que o endpoint faz.
